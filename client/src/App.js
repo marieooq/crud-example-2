@@ -5,6 +5,13 @@ import "./App.css";
 function App() {
   const [movieName, setMovieName] = useState("");
   const [review, setReview] = useState("");
+  const [movieReviewList, setMovieReviewList] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:3001/api/get").then((response) => {
+      setMovieReviewList(response.data);
+    });
+  }, []);
 
   const submitReview = () => {
     axios
@@ -44,6 +51,14 @@ function App() {
       </div>
 
       <button onClick={submitReview}>submit</button>
+
+      {movieReviewList.map((val) => {
+        return (
+          <h1>
+            Movie Name: {val.movieName} | Movie Review: {val.movieReview}
+          </h1>
+        );
+      })}
     </div>
   );
 }
