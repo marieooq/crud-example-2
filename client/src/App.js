@@ -24,6 +24,10 @@ function App() {
     ]);
   };
 
+  const deleteReview = (movie) => {
+    axios.delete(`http://localhost:3001/api/delete/${movie}`);
+  };
+
   return (
     <div className="App">
       <h1>CRUD Application</h1>
@@ -49,13 +53,26 @@ function App() {
 
       <button onClick={submitReview}>submit</button>
 
-      {movieReviewList.map((val, index) => {
-        return (
-          <h1 key={index}>
-            Movie Name: {val.movieName} | Movie Review: {val.movieReview}
-          </h1>
-        );
-      })}
+      <div className="card-container">
+        {movieReviewList.map((val, index) => {
+          return (
+            <div className="card" key={index}>
+              <h1> {val.movieName} </h1>
+              <p>{val.movieReview}</p>
+
+              <button
+                onClick={() => {
+                  deleteReview(val.movieName);
+                }}
+              >
+                Delete
+              </button>
+              <input type="text" className="update-input" />
+              <button>Update</button>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

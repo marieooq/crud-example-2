@@ -36,6 +36,16 @@ app.post("/api/insert", (req, res) => {
   });
 });
 
+app.delete("/api/delete/:movieName", (req, res) => {
+  const name = req.params.movieName;
+
+  const sqlDelete = "DELETE FROM movie_reviews WHERE movieName = ?;";
+
+  db.query(sqlDelete, name, (err, result) => {
+    if (err) console.log(err);
+  });
+});
+
 app.listen(3001, () => {
   console.log("running on port 3001");
 });
