@@ -14,17 +14,14 @@ function App() {
   }, []);
 
   const submitReview = () => {
-    axios
-      .post("http://localhost:3001/api/insert", {
-        movieName: movieName,
-        movieReview: review,
-      })
-      .then(() => {
-        alert("successfully insert");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    axios.post("http://localhost:3001/api/insert", {
+      movieName: movieName,
+      movieReview: review,
+    });
+    setMovieReviewList([
+      ...movieReviewList,
+      { movieName: movieName, movieReview: review },
+    ]);
   };
 
   return (
@@ -52,9 +49,9 @@ function App() {
 
       <button onClick={submitReview}>submit</button>
 
-      {movieReviewList.map((val) => {
+      {movieReviewList.map((val, index) => {
         return (
-          <h1>
+          <h1 key={index}>
             Movie Name: {val.movieName} | Movie Review: {val.movieReview}
           </h1>
         );
