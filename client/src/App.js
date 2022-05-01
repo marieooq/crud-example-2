@@ -63,9 +63,9 @@ function App() {
       <button onClick={submitReview}>submit</button>
 
       <div className="card-container">
-        {movieReviewList.map((val) => {
+        {movieReviewList.map((val, index) => {
           return (
-            <div className="card" key={val.id}>
+            <div className="card" key={index}>
               <h1> {val.movieName} </h1>
               <p>{val.movieReview}</p>
 
