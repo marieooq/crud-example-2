@@ -36,24 +36,23 @@ app.post("/api/insert", (req, res) => {
   });
 });
 
-app.delete("/api/delete/:movieName", (req, res) => {
-  const name = req.params.movieName;
+app.delete("/api/delete/:id", (req, res) => {
+  const id = req.params.id;
 
-  const sqlDelete = "DELETE FROM movie_reviews WHERE movieName = ?;";
+  const sqlDelete = "DELETE FROM movie_reviews WHERE id = ?;";
 
-  db.query(sqlDelete, name, (err, result) => {
+  db.query(sqlDelete, id, (err, result) => {
     if (err) console.log(err);
   });
 });
 
 app.put("/api/update", (req, res) => {
-  const name = req.body.movieName;
+  const id = req.body.id;
   const review = req.body.movieReview;
 
-  const sqlUpdate =
-    "UPDATE movie_reviews SET movieReview = ? WHERE movieName =?;";
+  const sqlUpdate = "UPDATE movie_reviews SET movieReview = ? WHERE id =?;";
 
-  db.query(sqlUpdate, [review, name], (err, result) => {
+  db.query(sqlUpdate, [review, id], (err, result) => {
     if (err) console.log(err);
   });
 });

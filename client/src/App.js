@@ -25,13 +25,13 @@ function App() {
     ]);
   };
 
-  const deleteReview = (movie) => {
-    axios.delete(`http://localhost:3001/api/delete/${movie}`);
+  const deleteReview = (id) => {
+    axios.delete(`http://localhost:3001/api/delete/${id}`);
   };
 
-  const updateReview = (movie) => {
+  const updateReview = (id) => {
     axios.put("http://localhost:3001/api/update", {
-      movieName: movie,
+      id: id,
       movieReview: newReview,
     });
     setNewReview("");
@@ -63,15 +63,15 @@ function App() {
       <button onClick={submitReview}>submit</button>
 
       <div className="card-container">
-        {movieReviewList.map((val, index) => {
+        {movieReviewList.map((val) => {
           return (
-            <div className="card" key={index}>
+            <div className="card" key={val.id}>
               <h1> {val.movieName} </h1>
               <p>{val.movieReview}</p>
 
               <button
                 onClick={() => {
-                  deleteReview(val.movieName);
+                  deleteReview(val.id);
                 }}
               >
                 Delete
@@ -85,7 +85,7 @@ function App() {
               />
               <button
                 onClick={() => {
-                  updateReview(val.movieName);
+                  updateReview(val.id);
                 }}
               >
                 Update
